@@ -1,0 +1,73 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/jetbrains-mono';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    background: #0a0b0e;
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-ink font-sans text-paper antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  ::selection {
+    background: #7aa2ff;
+    color: #0a0b0e;
+  }
+  :focus-visible {
+    outline: 2px solid #7aa2ff;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[0.18em] text-accent;
+  }
+  .section-title {
+    @apply font-display text-3xl font-normal leading-tight tracking-tight sm:text-4xl;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full border border-line px-2.5 py-1 font-mono text-[0.72rem] leading-none text-mute;
+  }
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-medium transition-colors duration-200;
+  }
+  .btn-primary {
+    @apply btn bg-paper text-ink hover:bg-accent;
+  }
+  .btn-ghost {
+    @apply btn border border-line-strong text-paper hover:border-accent hover:text-accent;
+  }
+}
+
+/* Entrance motion: only when the user has not asked for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  .flow-dot {
+    animation: flow 2.8s ease-in-out infinite;
+  }
+  @keyframes flow {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
